@@ -86,6 +86,17 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title : `This is a test Article`,
+    
+    date : `Feb 16th 2021`,
+
+    firstParagraph : `This is some random text that has absolutley no purpose other than filling up space and appearing to be a paragraph. Should this have been an actual paragraph you likely would have gotten some educational value from it. However, since it isn't, you likely only succeeded in wasting your time!`,
+
+    secondParagraph : `This is yet another blob of random text. I already told you it had no educational or entertainment value. If you continue to read it, you will only be wasting your time.`,
+
+    thirdParagraph : `That's it. How many times must I repeat myself. Stop reading this at once. Go for a walk, go to the park. Do something productive. Remember - practice social distancing!`
   }
 ];
 
@@ -101,16 +112,52 @@ const data = [
     {three separate paragraph elements}
 
     <span class="expandButton">+</span>
-  </div>
-
+  </div>*/
+    function articleMaker (obj) {
+      const article = document.createElement('div');
+      article.classList.add('article');
+      const title = document.createElement('h2');
+      title.textContent = obj.title;
+      article.appendChild(title);
+      const date = document.createElement('p');
+      date.textContent = obj.date;
+      date.classList.add('date');
+      article.appendChild(date);
+      const p1 = document.createElement('p');
+      p1.textContent = obj.firstParagraph;
+      article.appendChild(p1);
+      const p2 = document.createElement('p');
+      p2.textContent = obj.secondParagraph;
+      article.appendChild(p2);
+      const p3 = document.createElement('p');
+      p3.textContent = obj.thirdParagraph;
+      article.appendChild(p3);
+      const expand = document.createElement('span');
+      expand.classList.add('expandButton');
+      expand.textContent = "+";
+      article.appendChild(expand);
+    
+  /*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
-  This listener should toggle the class 'article-open' on div.article.
+  This listener should toggle the class 'article-open' on div.article.*/
 
-  Step 3: Don't forget to return something from your function!
-
+      expand.addEventListener('click', () => {
+        article.classList.toggle('article-open');
+      });
+    
+  /*
+  Step 3: Don't forget to return something from your function!*/
+      return article;
+    }
+/*
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
-  to create a div.article element and append it to the DOM inside div.articles (see index.html).
-
+  to create a div.article element and append it to the DOM inside div.articles (see index.html).*/
+    const articles = document.querySelector('.articles');
+    
+    data.forEach((data) => {
+      articles.appendChild(articleMaker(data));
+    });
+  /*
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
